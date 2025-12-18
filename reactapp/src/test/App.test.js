@@ -24,7 +24,7 @@ test('adds new order and checks if it appears in the list', async () => {
 
   // Submit the form
   fireEvent.click(screen.getByText(/submit/i));
-  fireEvent.click(screen.getByText(/order list/i));
+
   // Check if the new order appears in the order list
   await waitFor(() => {
     expect(screen.getByText('New Order')).toBeInTheDocument();
@@ -38,7 +38,7 @@ test('displays correct details for an order when clicked', async () => {
   fireEvent.click(screen.getByText(/add order/i));
   fireEvent.change(screen.getByPlaceholderText(/product name/i), { target: { value: 'Order 1' } });
   fireEvent.change(screen.getByPlaceholderText(/quantity/i), { target: { value: '10' } });
-  fireEvent.click(screen.getByText(/add order/i));
+  fireEvent.click(screen.getByText(/submit/i));
 
   // Navigate to the order details page
   fireEvent.click(screen.getByText('Order 1'));
@@ -55,7 +55,7 @@ test('increases quantity correctly in order status', async () => {
   fireEvent.click(screen.getByText(/add order/i));
   fireEvent.change(screen.getByPlaceholderText(/product name/i), { target: { value: 'Order 2' } });
   fireEvent.change(screen.getByPlaceholderText(/quantity/i), { target: { value: '5' } });
-  fireEvent.click(screen.getByText(/add order/i));
+  fireEvent.click(screen.getByText(/submit/i));
 
   // Go to order status page
   fireEvent.click(screen.getByText('Order 2'));
@@ -75,7 +75,7 @@ test('decreases quantity correctly in order status', async () => {
   fireEvent.click(screen.getByText(/add order/i));
   fireEvent.change(screen.getByPlaceholderText(/product name/i), { target: { value: 'Order 3' } });
   fireEvent.change(screen.getByPlaceholderText(/quantity/i), { target: { value: '5' } });
-  fireEvent.click(screen.getByText(/add order/i));
+  fireEvent.click(screen.getByText(/submit/i));
 
   // Go to order status page
   fireEvent.click(screen.getByText('Order 3'));
@@ -114,7 +114,7 @@ test('displays the correct text on Add Order page', () => {
 
   // Check if the form inputs and button are present
   expect(screen.getByPlaceholderText(/product name/i)).toBeInTheDocument();
-  expect(screen.getByText(/Add Order/)).toBeInTheDocument();
+  expect(screen.getByText(/Submit/)).toBeInTheDocument();
 });
 
 test('checks if "Back to Order" button works in Order Status page', () => {
@@ -124,7 +124,7 @@ test('checks if "Back to Order" button works in Order Status page', () => {
   fireEvent.click(screen.getByText(/add order/i));
   fireEvent.change(screen.getByPlaceholderText(/product name/i), { target: { value: 'Order 4' } });
   fireEvent.change(screen.getByPlaceholderText(/quantity/i), { target: { value: '20' } });
-  fireEvent.click(screen.getByText(/add order/i));
+  fireEvent.click(screen.getByText(/submit/i));
   fireEvent.click(screen.getByText('Order 4'));
   fireEvent.click(screen.getByText(/update order status/i));
 
@@ -140,7 +140,7 @@ test('checks if Add Order button is working after adding an order', async () => 
   fireEvent.click(screen.getByText(/add order/i));
   fireEvent.change(screen.getByPlaceholderText(/product name/i), { target: { value: 'Order 5' } });
   fireEvent.change(screen.getByPlaceholderText(/quantity/i), { target: { value: '30' } });
-  fireEvent.click(screen.getByText(/add order/i));
+  fireEvent.click(screen.getByText(/submit/i));
 
   // Verify order list contains the new order
   await waitFor(() => {
