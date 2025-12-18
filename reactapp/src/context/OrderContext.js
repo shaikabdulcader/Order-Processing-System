@@ -1,6 +1,5 @@
 import React, { createContext, useState } from 'react';
 
-// Create context for orders
 export const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
@@ -10,16 +9,16 @@ export const OrderProvider = ({ children }) => {
     setOrders(prevOrders => [...prevOrders, order]);
   };
 
-  const updateOrderStatus = (id, newStatus) => {
+  const updateOrderQuantity = (id, newQuantity) => {
     setOrders(prevOrders =>
       prevOrders.map(order =>
-        order.id === id ? { ...order, status: newStatus } : order
+        order.id === id ? { ...order, quantity: newQuantity } : order
       )
     );
   };
 
   return (
-    <OrderContext.Provider value={{ orders, addOrder, updateOrderStatus }}>
+    <OrderContext.Provider value={{ orders, addOrder, updateOrderQuantity }}>
       {children}
     </OrderContext.Provider>
   );

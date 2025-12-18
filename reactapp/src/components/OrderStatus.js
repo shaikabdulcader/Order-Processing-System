@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 
 const OrderStatus = () => {
   const { id } = useParams();
   const { orders, updateOrderQuantity } = useContext(OrderContext);
   const order = orders.find(o => o.id === parseInt(id));
-  const history = useHistory();
 
   const increaseQuantity = () => {
     updateOrderQuantity(order.id, order.quantity + 1);

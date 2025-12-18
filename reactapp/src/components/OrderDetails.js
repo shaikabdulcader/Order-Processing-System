@@ -14,7 +14,6 @@ const OrderDetails = () => {
         <>
           <h2>{order.productName}</h2>
           <p>Quantity: {order.quantity}</p>
-          <p>Status: {order.status}</p>
           <Link to={`/order-status/${order.id}`}>Update Order Status</Link>
         </>
       ) : (

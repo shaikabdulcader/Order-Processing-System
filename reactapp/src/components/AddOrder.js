@@ -1,29 +1,27 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 
 const AddOrder = () => {
   const { addOrder } = useContext(OrderContext);
   const [productName, setProductName] = useState('');
-  const [quantity, setQuantity] = useState(0);
-  const [status, setStatus] = useState('Pending');
+  const [quantity, setQuantity] = useState('');
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newOrder = {
-      id: Date.now(), // Unique ID based on timestamp
+      id: Date.now(),
       productName,
-      quantity,
-      status
+      quantity: parseInt(quantity)
     };
     addOrder(newOrder);
-    setProductName('');
-    setQuantity(0);
-    setStatus('Pending');
+    history.push('/');
   };
 
   return (
     <div>
-      <h2>Add New Order</h2>
+      <h2>Add Order</h2>
       <form onSubmit={handleSubmit}>
         <input 
           type="text" 
@@ -34,10 +32,10 @@ const AddOrder = () => {
         <input 
           type="number" 
           value={quantity} 
-          onChange={e => setQuantity(Number(e.target.value))} 
+          onChange={e => setQuantity(e.target.value)} 
           placeholder="Quantity" 
         />
-        <button type="submit">Add Order</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

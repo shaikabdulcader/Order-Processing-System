@@ -8,12 +8,16 @@ const OrderList = () => {
   return (
     <div>
       <h2>Order List</h2>
+      <Link to="/add-order">Add Order</Link>
       <ul>
         {orders.map(order => (
           <li key={order.id}>
-            <Link to={`/order/${order.id}`}>{order.productName}</Link> - Quantity: {order.quantity} - Status: {order.status}
+            <Link to={`/order/${order.id}`}>{order.productName}</Link>
           </li>
         ))}
+        <li>
+          <Link to="/order/999">Non-existent Order</Link>
+        </li>
       </ul>
     </div>
   );
