@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { OrderProvider } from './context/OrderContext';
+import OrderList from './components/OrderList';
+import AddOrder from './components/AddOrder';
+import OrderDetails from './components/OrderDetails';
+import OrderStatus from './components/OrderStatus';
+import Navbar from './components/Navbar';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <OrderProvider>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={OrderList} />
+          <Route path="/add-order" component={AddOrder} />
+          <Route path="/order/:id" component={OrderDetails} />
+          <Route path="/order-status/:id" component={OrderStatus} />
+        </Switch>
+      </Router>
+    </OrderProvider>
   );
-}
+};
 
 export default App;
