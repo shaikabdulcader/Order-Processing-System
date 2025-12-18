@@ -1,33 +1,28 @@
-import React, { useState, useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 
 const OrderStatus = () => {
   const { id } = useParams();
-  const { orders, updateOrderStatus } = useContext(OrderContext);
+  const { orders, updateOrderQuantity } = useContext(OrderContext);
   const order = orders.find(o => o.id === parseInt(id));
   const history = useHistory();
 
-  const [status, setStatus] = useState(order ? order.status : 'Pending');
-
-  const handleChange = (e) => {
-    setStatus(e.target.value);
+  const increaseQuantity = () => {
+    updateOrderQuantity(order.id, order.quantity + 1);
   };
 
-  const handleSubmit = () => {
-    updateOrderStatus(order.id, status);
-    history.push(`/order/${order.id}`);
+  const decreaseQuantity = () => {
+    updateOrderQuantity(order.id, order.quantity - 1);
   };
 
   return (
     <div>
-      <h2>Update Order Status for {order?.productName}</h2>
-      <select value={status} onChange={handleChange}>
-        <option value="Pending">Pending</option>
-        <option value="Processing">Processing</option>
-        <option value="Completed">Completed</option>
-      </select>
-      <button onClick={handleSubmit}>Update Status</button>
+      <h2>Order Status</h2>
+      <p>Current Quantity: {order?.quantity}</p>
+      <button onClick={increaseQuantity}>+</button>
+      <button onClick={decreaseQuantity}>-</button>
+      <Link to={`/order/${order?.id}`}>Back to Order</Link>
     </div>
   );
 };
