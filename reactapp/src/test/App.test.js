@@ -23,8 +23,8 @@ test('adds new order and checks if it appears in the list', async () => {
   fireEvent.change(screen.getByPlaceholderText(/quantity/i), { target: { value: '5' } });
 
   // Submit the form
-  fireEvent.click(screen.getByText(/add order/i));
-
+  fireEvent.click(screen.getByText(/submit/i));
+  fireEvent.click(screen.getByText(/order list/i));
   // Check if the new order appears in the order list
   await waitFor(() => {
     expect(screen.getByText('New Order')).toBeInTheDocument();
